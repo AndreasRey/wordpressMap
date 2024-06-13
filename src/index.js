@@ -1,6 +1,8 @@
 import _ from 'lodash';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import './css/style.css';
-import Icon from './img/icon.png';
+//import Icon from './img/icon.png';
 
 function component() {
   let element = document.querySelector('.wordpressmap-content');
@@ -12,16 +14,17 @@ function component() {
     document.body.appendChild(element);
   }
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+  const map = document.createElement('div');
+  map.id = 'map';
 
-  const myIcon = new Image();
-  myIcon.src = Icon;
-
-  element.appendChild(myIcon);
+  element.appendChild(map);
 
   return element;
 }
 
 component();
+var map = L.map('map').setView([48.86198, 2.33793], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
