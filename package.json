@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
+    "leaflet.locatecontrol": "^0.81.1",
     "lodash": "^4.17.21"
   }
 }
