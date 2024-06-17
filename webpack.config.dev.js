@@ -6,7 +6,15 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'inline-source-map',
   devServer: {
-    static: './dist',
+    static: [
+      {
+        directory: path.join(__dirname, 'dist'),
+      },
+      {
+        directory: path.join(__dirname, 'public'),
+      },
+    ],
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
