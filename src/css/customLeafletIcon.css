@@ -1,0 +1,89 @@
+.custom-leaflet-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0%;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  color: white;
+  margin: -20px 0 0 -20px;
+  box-shadow: 0px 0px 2px rgba(50,50,50,1), 0px 0px 6px rgba(255,255,255,1);
+  border:1px solid rgba(100,100,100,1);
+}
+.custom-leaflet-icon:hover {
+  box-shadow: 0px 0px 6px rgba(0,0,0,1), 0px 0px 18px rgba(255,255,255,1);
+}
+
+.custom-leaflet-icon:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    margin: 6px 0 0 6px;
+    background: #ffffff;
+    border-color: rgba(0,0,0,1);
+    border-width: 2px;
+    border-style: solid;
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: unset;
+}
+  .custom-leaflet-icon-selected {
+    box-shadow: 0px 0px 3px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+  }
+  .custom-leaflet-icon-selected:hover {
+    box-shadow: 0px 0px 6px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+    border-color: rgba(180,180,180,1);
+  }
+  
+  .custom-leaflet-icon-selected:after {
+    border-color: rgba(0, 0, 0, 1);
+    background: rgba(255, 255, 0, 1);
+    border-width: 4px;
+    margin: 4px 0 0 4px
+  }
+  
+  .custom-leaflet-icon:after:hover {
+    animation-name: pulsate;
+    animation-fill-mode: both;
+    animation-duration: 1s;
+  }
+  .custom-leaflet-icon-shadow {
+    background: rgba(75,75,75,0.3);
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 11px 0px 0px -12px;
+    transform: rotateX(55deg);
+    z-index: -2;
+  }
+.custom-leaflet-icon-letter:after {
+    content: '';
+    width: 1.8em;
+    height: 1.8em;
+    margin: 0.25em 0 0 0.25em;
+    background: #ffffff;
+    border-color: rgba(0,0,0,1);
+    border-width: 1px;
+    border-style: solid;
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: unset;
+  }
+  .letter-icon {
+    display: block;
+    width: fit-content;
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-family: monospace, monospace;
+  }
+  .letter-icon-1 {
+    font-size: 1.3em;
+    top: -0.6em;
+    left: -0.2em;
+  }
