@@ -1,1 +1,13 @@
-#map { height: 400px; }
+.wordpressmap-content {
+  height: 93vh;
+  margin: 0;
+  border-bottom: 1px solid black;
+}
+
+#map {
+  height: 100%;
+}
+.leaflet-container .leaflet-control-attribution {
+  float: right;
+  text-align: right
+}
