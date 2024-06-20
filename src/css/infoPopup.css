@@ -15,49 +15,68 @@
   padding: 1em;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
-  align-items: center; /* Align items vertically in the center */
-  flex-direction: row; /* Default direction, image on the left, details on the right */
+  align-items: center;
+  flex-direction: row;
 }
 
+/* Mobile display */
 @media (max-width: 768px) {
   .map-info-popup {
-    height: 20em; /* Adjust height for mobile */
-    flex-direction: column; /* Stack image and details vertically */
+    height: 14em;
+    flex-direction: column;
   }
   .popup-image-container {
-    width: 100%; /* Full width for the image container on mobile */
-    height: auto; /* Adjust height based on content */
+    width: 100%;
+    height: auto;
   }
   .popup-image {
-    max-height: 100%; /* Allow image to scale within the container */
+    max-height: 100%;
   }
 }
 
+/* Desktop display */
 @media (min-width: 769px) {
   .map-info-popup {
-    height: 10em;
+    height: 14em;
   }
 }
 .map-info-popup h3 {
   margin-top: 0;
 }
 
+.popup-content {
+  margin: auto;
+}
+
+.popup-content.popup-content-aligned {
+  text-align: center;
+}
+
 .popup-image-container {
-  flex: 0 1 auto; /* Do not grow, allow shrinking, basis is auto */
-  width: 20em; /* Maximum width of the image container */
-  height: 100%; /* Match the height of the popup to prevent overflow */
-  display: flex; /* Use flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  flex: 0 1 auto;
+  width: 15em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-image {
-  max-height: 10em; /* Ensure the image does not exceed the container's height */
-  max-width: 100%; /* Ensure the image is responsive and maintains aspect ratio */
-  object-fit: contain; /* Scale the image properly within its bounds */
+  max-height: 10em;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .popup-details {
-  flex: 1 1 auto; /* Allow growing and shrinking, basis is auto */
-  padding-left: 10px; /* Space between image and details */
+  flex: 1 1 auto;
+  padding-left: 15px;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.popup-achile-logo {
+  max-width: 150px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  margin-left: 15%;
+  margin-right: 15%;
 }

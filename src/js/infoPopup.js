@@ -1,5 +1,7 @@
 import L from 'leaflet';
 import '../css/infoPopup.css';
+import achileLogoUrl from '../img/ACHILE-logo-couleurs-seul.svg';
+
 
 let info = L.control({ position: 'bottomright' });
 
@@ -42,14 +44,15 @@ const createInfoPopup = (map) => {
       //   <p>${props.address}</p>
       // `;
       htmlString = `
-        <div style="display: flex;">
+        <div class="popup-content" style="display: flex;">
           <div class="popup-image-container">
             <img src="${props.pic}" alt="Location Image" class="popup-image">
           </div>
           <div class="popup-details">
             <h3>${props.name}</h3>
             <p>${props.address}</p>
-            <a class="mapsLink" href="#">Open in Google Maps</a>
+            <p><a class="mapsLink" href="#">Open in Google Maps</a></p>
+            <p><a href="${props.link}" target="_blank">Site internet de l'établissement</a></p>
           </div>
         </div>
       `;
@@ -57,7 +60,11 @@ const createInfoPopup = (map) => {
 
     } else {
       htmlString = `
-        <p>Hover over a state</p>
+        <div class="popup-content popup-content-aligned">
+          <img class="popup-achile-logo" src="${achileLogoUrl}" alt="ACHILE logo">
+          <p><h3>Centres labellisés</h3></p>
+          <p>Click on a marker to see more details.</p>
+        </div>
       `;
     }
     this._div.innerHTML = htmlString;

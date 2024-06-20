@@ -11,3 +11,48 @@
   float: right;
   text-align: right
 }
+
+.legend {
+  background: white;
+  line-height: 18px;
+  padding: 2px 12px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.legend-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.legend-span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.legend-span span {
+  display: inline-block;
+}
+
+.legend div.legend-item {
+  margin: 0;
+  padding: auto;
+  align-items: center;
+}
+.text-legend {
+  position: relative;
+  top: -0.6em;
+}
+/* Styles for retina (high-DPI) screens */
+@media only screen and (min-resolution: 192dpi),
+     only screen and (min-device-pixel-ratio: 2) {
+      .text-legend {
+        position: relative;
+        top: -0.6em;
+      }
+     }

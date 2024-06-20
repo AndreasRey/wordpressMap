@@ -1,4 +1,4 @@
-.custom-leaflet-icon {
+.custom-leaflet-icon, .custom-leaflet-icon-legend {
   width: 30px;
   height: 30px;
   border-radius: 50% 50% 50% 0%;
@@ -31,17 +31,17 @@
 }
 
 .custom-leaflet-icon-selected {
-  box-shadow: 0px 0px 3px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+  box-shadow: 0px 0px 3px #FFB056, 0px 0px 18px rgba(255,255,255,1);
 }
 
 .custom-leaflet-icon-selected:hover {
-  box-shadow: 0px 0px 6px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+  box-shadow: 0px 0px 6px #FFB056, 0px 0px 18px rgba(255,255,255,1);
   border-color: rgba(180,180,180,1);
 }
 
 .custom-leaflet-icon-selected:after {
   border-color: rgba(0, 0, 0, 1);
-  background: rgba(255, 255, 0, 1);
+  background: #FFB056;
   border-width: 4px;
   margin: 4px 0 0 4px
 }
@@ -65,7 +65,7 @@
   z-index: -2;
 }
 
-.custom-leaflet-icon-letter:after {
+.custom-leaflet-icon-letter:after, .custom-leaflet-icon-letter-legend:after {
   content: '';
   width: 1.8em;
   height: 1.8em;
@@ -79,12 +79,13 @@
   box-sizing: unset;
 }
 
+
 .custom-leaflet-icon-letter.custom-leaflet-icon-selected {
-  box-shadow: 0px 0px 4px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+  box-shadow: 0px 0px 4px #FFB056, 0px 0px 18px rgba(255,255,255,1);
 }
 
 .custom-leaflet-icon-letter.custom-leaflet-icon-selected:hover {
-  box-shadow: 0px 0px 8px rgba(255, 255, 0, 1), 0px 0px 18px rgba(255,255,255,1);
+  box-shadow: 0px 0px 8px #FFB056, 0px 0px 18px rgba(255,255,255,1);
   border-color: rgba(180,180,180,1);
 }
 
@@ -116,7 +117,7 @@
 
 .custom-leaflet-icon-letter.custom-leaflet-icon-selected:after {
   border-color: rgba(0, 0, 0, 1);
-  background: rgba(255, 255, 0, 1);
+  background: #FFB056;
   border-width: 2px;
   width: 22px;
   height: 22px;
@@ -129,11 +130,38 @@
   left: -2px;
 }
 
-
+.custom-leaflet-icon-legend {
+  width: 24px;
+  height: 24px;
+  margin: -6px 0px 0px -20px;
+  position: relative;
+}
+.custom-leaflet-icon-letter-legend:after {
+  width: 16px;
+  height: 16px;
+}
+.letter-icon-1-legend {
+  font-size: 0.9em;
+  top: -4px;
+  left: -10px;
+  position: relative;
+}
 
 /* Styles for retina (high-DPI) screens */
 @media only screen and (min-resolution: 192dpi),
      only screen and (min-device-pixel-ratio: 2) {
+
+      .custom-leaflet-icon-legend {
+        width: 24px;
+        height: 24px;
+        margin: -6px 0px 0px -20px;
+        position: relative;
+      }
+      .custom-leaflet-icon-letter-legend:after {
+        width: 16px;
+        height: 16px;
+        margin: 0.22em 0 0 0.22em;
+      }      
 
       .custom-leaflet-icon-letter:after {
         content: '';
@@ -150,7 +178,7 @@
       }
       .custom-leaflet-icon-letter.custom-leaflet-icon-selected:after {
         border-color: rgba(0, 0, 0, 1);
-        background: rgba(255, 255, 0, 1);
+        background: #FFB056;
         border-width: 0.15em;
         width: 1.9em;
         height: 1.9em;
@@ -160,6 +188,12 @@
         font-size: 1.3em;
         top: -0.6em;
         left: -0.2em;
+      }
+      .letter-icon-1-legend {
+        font-size: 0.9em;
+        top: -2px;
+        left: -10px;
+        position: relative;
       }
 
 
