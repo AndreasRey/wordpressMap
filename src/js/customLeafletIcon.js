@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import '../css/customLeafletIcon.css';
 
 function setIcon (color, selected, letter) {
   const selectionClass = selected ? 'custom-leaflet-icon-selected' : '';
