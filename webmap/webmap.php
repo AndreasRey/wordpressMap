@@ -14,8 +14,6 @@ function webmap_shortcode() {
   $content = '
   <div class="custom-html-content">
       <div class="wordpressmap-content"></div>
-      <h1>Custom HTML Content</h1>
-      <p>This is a custom plugin that outputs HTML content.</p>
   </div>
   ';
   return $content;
