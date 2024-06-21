@@ -70,7 +70,7 @@ const leafletMap = (divId) => {
     fullscreenControlOptions: {
       position: 'topleft'
     }
-  }).setView([48.86198, 2.33793], 9);
+  }).setView([48.6925713, 2.2912155], 9);
 
   // This focus the map div on first click (to avoid non-educated users not seeing the info popup when clicking on a marker)
   const mapContainer = document.getElementById(divId);
@@ -96,7 +96,10 @@ const leafletMap = (divId) => {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-  L.control.locate().addTo(map);
+  L.control.locate({
+    keepCurrentZoomLevel: true,
+    flyTo: true
+  }).addTo(map);
   // L.control.scale({ position: 'topright' }).addTo(map);
   map.attributionControl.remove();
 
@@ -113,6 +116,34 @@ const leafletMap = (divId) => {
       </div>
     `;
   };
+
+  const HomeControl = L.Control.extend({
+    options: {
+        position: 'topleft'
+    },
+    onAdd: function(map) {
+        // Create a button element
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-home');
+        
+        container.style.backgroundColor = 'white';
+        container.style.width = '30px';
+        container.style.height = '30px';
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.justifyContent = 'center';
+        container.style.cursor = 'pointer';
+
+        // Add a home icon or text
+        container.innerHTML = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 12L2 42h10v20h18V42h4v20h18V42h10z"/></svg>';
+
+        // Define the action on click
+        container.onclick = function() {
+            map.flyTo([48.6925713, 2.2912155], 9); // Reset to initial extent
+        };
+
+        return container;
+    }
+});
 
   const LegendControl = L.Control.extend({
     options: {
@@ -149,6 +180,7 @@ const leafletMap = (divId) => {
 
   // Add the legend control to the map
   map.addControl(new LegendControl());
+  map.addControl(new HomeControl());
 
 
   createInfoPopup(map);

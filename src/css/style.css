@@ -1,3 +1,10 @@
+.wordpressmap-content ::after, .wordpressmap-content ::before {
+  box-sizing: unset !important;
+}
+*, ::after, ::before {
+	box-sizing: unset !important;
+}
+
 .wordpressmap-content {
   height: 90vh;
   margin: 0;
@@ -47,6 +54,27 @@
 .text-legend {
   position: relative;
   top: -0.6em;
+}
+
+.leaflet-control-zoom a {
+  text-decoration: none !important;
+}
+.leaflet-control-home {
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-control-home svg {
+  height: 20px;
+  color: black;
 }
 /* Styles for retina (high-DPI) screens */
 @media only screen and (min-resolution: 192dpi),
