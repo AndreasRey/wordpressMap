@@ -16,9 +16,9 @@ function component() {
   map.id = 'map';
 
   element.appendChild(map);
-
-  return element;
 }
 
-component();
-leafletMap('map');
+document.addEventListener('DOMContentLoaded', () => {
+  component();
+  leafletMap('map');
+});
