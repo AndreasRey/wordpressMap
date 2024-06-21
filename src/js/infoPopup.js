@@ -71,7 +71,6 @@ const createInfoPopup = (map) => {
     const mapsLink = this._div.querySelector('.mapsLink');
     if (mapsLink) {
       mapsLink.addEventListener('click', function (event) {
-        console.log("clicked");
         event.preventDefault();
         openGoogleMaps(props.y, props.x);
       });

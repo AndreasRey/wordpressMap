@@ -10,8 +10,8 @@ import { createInfoPopup, updateInfoPopup } from './infoPopup';
 
 let featureGroup = L.featureGroup();
 
-// const symbology = "centres-labellises";
-const symbology = "c";
+const symbology = "centres-labellises";
+// const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
@@ -155,9 +155,8 @@ const leafletMap = (divId) => {
 
   L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
 
-  getData('./data/centres.json').then(data => {
-    // Use the data here
-    console.log("data", data)
+  // getData('./data/centres.json').then(data => {
+  getData('	https://www.urgenceschirurgicalesinfantiles-idf.fr/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMoxR0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABU0Wug').then(data => {
     const markers = data.markers.map(function (item) {
       return {
         name: item.title,
