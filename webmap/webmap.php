@@ -21,7 +21,7 @@ function webmap_shortcode() {
 add_shortcode('wordpressmap-html', 'webmap_shortcode');
 
 function webmap_enqueue_scripts() {
-  //wp_enqueue_style('my-custom-plugin-style', plugins_url('/css/style.css', __FILE__));
+  // wp_enqueue_style('my-custom-plugin-style', plugins_url('/main.css', __FILE__));
   wp_enqueue_script('wordpressmap-script', plugins_url('/script.js', __FILE__), array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'webmap_enqueue_scripts');
