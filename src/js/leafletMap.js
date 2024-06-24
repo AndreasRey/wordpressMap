@@ -56,7 +56,6 @@ const addMarkers = (map, data) => {
       }
     })
     marker.addTo(featureGroup);
-    // marker.bindPopup(`<b>${item.name}</b><br>${item.address}`);
   });
   featureGroup.addTo(map);
   map.on('click', function () {
@@ -92,6 +91,8 @@ const leafletMap = (divId) => {
   if (mapContainer) {
     mapContainer.addEventListener('click', ensureVisibilityOnFirstClick, { capture: true });
   }
+
+
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -100,7 +101,6 @@ const leafletMap = (divId) => {
     keepCurrentZoomLevel: true,
     flyTo: true
   }).addTo(map);
-  // L.control.scale({ position: 'topright' }).addTo(map);
   map.attributionControl.remove();
 
   const legendItem = (color, text, layer) => {
@@ -126,7 +126,6 @@ const leafletMap = (divId) => {
         position: 'topleft'
     },
     onAdd: function(map) {
-        // Create a button element
         var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-home');
         
         container.style.backgroundColor = 'white';
@@ -140,9 +139,8 @@ const leafletMap = (divId) => {
         // Add a home icon or text
         container.innerHTML = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 12L2 42h10v20h18V42h4v20h18V42h10z"/></svg>';
 
-        // Define the action on click
         container.onclick = function() {
-            map.flyTo([48.6925713, 2.2912155], 9); // Reset to initial extent
+            map.flyTo([48.6925713, 2.2912155], 9);
         };
 
         return container;
@@ -205,7 +203,6 @@ const leafletMap = (divId) => {
     }
   });
 
-  // Add the legend control to the map
   map.addControl(new LegendControl());
 
 
@@ -250,7 +247,6 @@ const leafletMap = (divId) => {
 
   L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
 
-  // getData('./data/centres.json').then(data => {
   getData('	https://www.urgenceschirurgicalesinfantiles-idf.fr/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMoxR0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABU0Wug').then(data => {
     const markers = data.markers.map(function (item) {
       return {
@@ -266,7 +262,8 @@ const leafletMap = (divId) => {
     markers.sort((a, b) => b.y - a.y);
     addMarkers(map, markers);
   }).catch(error => {
-    // Handle the error here
+    console.error('Impossible to retrieve data from the server');
+    console.error('Error:', error);
   });
 };
 

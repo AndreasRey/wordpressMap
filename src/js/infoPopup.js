@@ -18,8 +18,8 @@ function openGoogleMaps(lat, lon) {
   } else {
       // Fallback to Google Maps website
       url = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
-      window.open(url, '_blank'); // Open in new tab for non-mobile devices
-      return; // Exit the function as the new tab is already opened
+      window.open(url, '_blank');
+      return;
   }
 
   // Try to open the app, fallback to website if not available
@@ -39,10 +39,6 @@ const createInfoPopup = (map) => {
     let htmlString;
     
     if (props) {
-      // htmlString = `
-      //   <h4>${props.name}</h4>
-      //   <p>${props.address}</p>
-      // `;
       htmlString = `
         <div class="popup-content" style="display: flex;">
           <div class="popup-image-container">
