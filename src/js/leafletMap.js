@@ -10,8 +10,8 @@ import { createInfoPopup, updateInfoPopup } from './infoPopup';
 
 let featureGroup = L.featureGroup();
 
-const symbology = "centres-labellises";
-// const symbology = "c";
+// const symbology = "centres-labellises";
+const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
@@ -103,18 +103,22 @@ const leafletMap = (divId) => {
   // L.control.scale({ position: 'topright' }).addTo(map);
   map.attributionControl.remove();
 
-  const legendItem = (color, text) => {
-    return `<div class="legend-item">
-      <span class="legend-span">
+  const legendItem = (color, text, layer) => {
+    let htmlString = `<div class="legend-item">`;
+    if (layer) {
+      htmlString += `<input type="checkbox" class="layer-checkbox" data-category-id="${layer}" checked></input>`
+    }
+    htmlString += `<span class="legend-span">
         <span
-          class="custom-leaflet-icon-legend custom-leaflet-icon-letter-legend"
-          style="background-image: radial-gradient(circle, rgba(220,220,220, 1) 10%, ${color} 90%);"
-        ></span>
-        <span class="letter-icon letter-icon-1-legend">H</span>
-      </span>  
-      <span class="text-legend">${text}</span>      
-      </div>
+        class="custom-leaflet-icon-legend custom-leaflet-icon-letter-legend"
+            style="background-image: radial-gradient(circle, rgba(220,220,220, 1) 10%, ${color} 90%);"
+          ></span>
+      <span class="letter-icon letter-icon-1-legend">H</span>
+    </span>  
+    <span class="text-legend">${text}</span>      
+    </div>
     `;
+    return htmlString;
   };
 
   const HomeControl = L.Control.extend({
@@ -161,21 +165,24 @@ const leafletMap = (divId) => {
       } else {
         legendItems = [{
           color: setMarkerColor("2"),
-          text: 'Etablissements de proximités'
+          text: 'Etablissements de proximités',
+          layer: "2"
         }, {
           color: setMarkerColor("3"),
-          text: 'Etablissements spécialisés'
+          text: 'Etablissements spécialisés',
+          layer: "3"
         }, {
           color: setMarkerColor("1"),
-          text: 'Etablissements référents'
+          text: 'Etablissements référents',
+          layer: "1"
         }];
-        legendClass = 'legend expended';
+        legendClass = 'legend expanded';
       }
       const container = L.DomUtil.create('div', legendClass);
 
       let legendHtml = '';
       legendItems.forEach((item) => {
-        legendHtml += legendItem(item.color, item.text);
+        legendHtml += symbology === "centres-labellises" ? legendItem(item.color, item.text) : legendItem(item.color, item.text, item.layer);
       });
 
       const LegendIcon = () => {
@@ -192,7 +199,7 @@ const leafletMap = (divId) => {
       };
       legendHtml += `<div class="legend-icon">${LegendIcon()}</div>`;
 
-      container.innerHTML = legendHtml;
+      container.innerHTML = `<div class="legend-content-wrapper">${legendHtml}<span class="legend-toggle-arrow toggle-legend-arrow-down"></span></div>`;
 
       return container;
     }
@@ -201,26 +208,38 @@ const leafletMap = (divId) => {
   // Add the legend control to the map
   map.addControl(new LegendControl());
 
-  document.querySelectorAll('.legend.leaflet-control').forEach((element) => {
+
+    document.querySelectorAll('.layer-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const categoryId = this.getAttribute('data-category-id');
+        const isChecked = this.checked;
+        featureGroup.eachLayer(layer => {
+          if (layer.options.props.category === categoryId) {
+            if (isChecked) {
+              layer.addTo(map);
+            } else {
+              layer.remove();
+            }
+          }
+        });
+      });
+    });
+
+
+  document.querySelectorAll('.legend-toggle-arrow, .legend-icon').forEach((element) => {
     element.addEventListener('click', function() {
-      // Toggle the 'expanded' class on click
-      console.log('click')
-      this.classList.toggle('expanded');
-      
-      // Check if the legend is expanded
-      const isExpanded = this.classList.contains('expanded');
-      
-      // // Find all .legend-item elements within the clicked legend
-      // const items = this.querySelectorAll('.legend-item');
-      
-      // // Show or hide .legend-item elements based on the expanded state
-      // items.forEach((item) => {
-      //   if (isExpanded) {
-      //     item.style.display = ''; // Show
-      //   } else {
-      //     item.style.display = 'none'; // Hide
-      //   }
-      // });
+      const legendControl = this.closest('.legend.leaflet-control');
+      const arrow = legendControl.querySelector('.legend-toggle-arrow');
+
+      legendControl.classList.toggle('expanded');
+
+      if (legendControl.classList.contains('expanded')) {
+        arrow.classList.remove('toggle-legend-arrow-down');
+        arrow.classList.add('toggle-legend-arrow-up');
+      } else {
+        arrow.classList.remove('toggle-legend-arrow-up');
+        arrow.classList.add('toggle-legend-arrow-down');
+      }
     });
   });
 

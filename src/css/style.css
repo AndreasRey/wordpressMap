@@ -25,16 +25,17 @@
   padding: 2px 12px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);  
 }
 .legend-icon {
   display: inline-block;
   width: 30px;
   height: 30px;
-  margin-top: 4px;
+  margin-top: 12px;
+  margin-bottom: 4px;
   background-size: contain;
   background-repeat: no-repeat;
+  cursor: pointer !important;
 }
 .legend-span {
   display: inline-flex;
@@ -55,6 +56,39 @@
 .text-legend {
   position: relative;
   top: -0.6em;
+}
+.layer-checkbox {
+  bottom: 5px;
+  position: relative;
+  margin-right: 12px;
+}
+
+.legend-toggle-arrow {
+  position: absolute;
+  top: 2px; /* Adjust as needed */
+  right: 2px; /* Adjust as needed */
+  cursor: pointer; /* Optional: Changes the cursor to a pointer to indicate it's clickable */
+}
+
+.legend.leaflet-control .legend-content-wrapper {
+  position: relative;
+}
+
+.toggle-legend-arrow-down, .toggle-legend-arrow-up {
+  display: inline-block;
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  cursor: pointer !important;
+}
+
+.toggle-legend-arrow-down {
+  border-top: 8px solid rgba(0, 0, 0, 0.8); /* Arrow pointing top-right to bottom-left */
+}
+
+.toggle-legend-arrow-up {
+  border-bottom: 8px solid rgba(0, 0, 0, 0.8); /* Arrow pointing bottom-left to top-right */
 }
 
 .leaflet-control-zoom a {
