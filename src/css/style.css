@@ -26,12 +26,13 @@
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer !important;
 }
 .legend-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -84,3 +85,11 @@
         top: -0.6em;
       }
      }
+
+.legend.expanded .legend-item, legend .legend-icon {
+  display: block;
+}
+
+.legend .legend-item, .legend.expanded .legend-icon {
+  display: none;
+}

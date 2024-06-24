@@ -150,13 +150,14 @@ const leafletMap = (divId) => {
       position: 'topright'
     },
     onAdd: function (map) {
-      const container = L.DomUtil.create('div', 'legend');
       let legendItems;
+      let legendClass;
       if (symbology === "centres-labellises") {
         legendItems = [{
           color: setMarkerColor(),
           text: 'Centres labellisés'
         }];
+        legendClass = 'legend';
       } else {
         legendItems = [{
           color: setMarkerColor("2"),
@@ -168,18 +169,61 @@ const leafletMap = (divId) => {
           color: setMarkerColor("1"),
           text: 'Etablissements référents'
         }];
+        legendClass = 'legend expended';
       }
+      const container = L.DomUtil.create('div', legendClass);
+
       let legendHtml = '';
       legendItems.forEach((item) => {
         legendHtml += legendItem(item.color, item.text);
       });
+
+      const LegendIcon = () => {
+        return `
+          <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="5" cy="5" r="4" fill="#F16C76" />
+            <circle cx="5" cy="15" r="4" fill="#00C490" />
+            <circle cx="5" cy="25" r="4" fill="#FFB056" />
+            <line x1="12" y1="5" x2="30" y2="5" stroke="black" stroke-width="2" />
+            <line x1="12" y1="15" x2="30" y2="15" stroke="black" stroke-width="2" />
+            <line x1="12" y1="25" x2="30" y2="25" stroke="black" stroke-width="2" />
+          </svg>
+        `;
+      };
+      legendHtml += `<div class="legend-icon">${LegendIcon()}</div>`;
+
       container.innerHTML = legendHtml;
+
       return container;
     }
   });
 
   // Add the legend control to the map
   map.addControl(new LegendControl());
+
+  document.querySelectorAll('.legend.leaflet-control').forEach((element) => {
+    element.addEventListener('click', function() {
+      // Toggle the 'expanded' class on click
+      console.log('click')
+      this.classList.toggle('expanded');
+      
+      // Check if the legend is expanded
+      const isExpanded = this.classList.contains('expanded');
+      
+      // // Find all .legend-item elements within the clicked legend
+      // const items = this.querySelectorAll('.legend-item');
+      
+      // // Show or hide .legend-item elements based on the expanded state
+      // items.forEach((item) => {
+      //   if (isExpanded) {
+      //     item.style.display = ''; // Show
+      //   } else {
+      //     item.style.display = 'none'; // Hide
+      //   }
+      // });
+    });
+  });
+
   map.addControl(new HomeControl());
 
 
