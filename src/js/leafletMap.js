@@ -199,6 +199,11 @@ const leafletMap = (divId) => {
 
       container.innerHTML = `<div class="legend-content-wrapper">${legendHtml}<span class="legend-toggle-arrow toggle-legend-arrow-down"></span></div>`;
 
+      L.DomEvent.on(container, 'click', L.DomEvent.stopPropagation)
+      .on(container, 'dblclick', L.DomEvent.stopPropagation)
+      .on(container, 'mousedown', L.DomEvent.stopPropagation);
+
+
       return container;
     }
   });
