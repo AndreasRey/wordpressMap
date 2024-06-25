@@ -16,7 +16,24 @@
 }
 .leaflet-container .leaflet-control-attribution {
   float: right;
-  text-align: right
+  text-align: right;
+}
+.leaflet-container .leaflet-control-pinsearch {
+  float: right;
+  z-index: 999999;
+  margin-bottom: 10px;
+}
+.leaflet-container .leaflet-control-pinsearch .search-input-container {
+  float: right;
+  margin-bottom: 10px;
+}
+.leaflet-container .leaflet-control-pinsearch .search-input-container .search-input {
+  height: 20px !important;
+}
+.leaflet-container .leaflet-control-pinsearch .search-results {
+  left: unset;
+  width: max-content;
+  top: 36px;
 }
 
 .legend {
@@ -127,6 +144,8 @@
 .legend .legend-item, .legend.expanded .legend-icon {
   display: none;
 }
+
+.mapsLink {
   display: flex;
   align-items: center;
 }

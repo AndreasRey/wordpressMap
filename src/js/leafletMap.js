@@ -3,6 +3,9 @@ import 'leaflet.locatecontrol';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css';
 import '../lib/leaflet.fullscreen-v3.0.2/Control.FullScreen.js';
 import '../lib/leaflet.fullscreen-v3.0.2/Control.FullScreen.css';
+import '../lib/custom-leaflet.pinsearch/Leaflet.PinSearch.js';
+import '../lib/custom-leaflet.pinsearch/Leaflet.PinSearch.css';
+import 'leaflet.pinsearch/src/Leaflet.PinSearch.css';
 import L from 'leaflet';
 import getData from './getData';
 import setIcon from './customLeafletIcon';
@@ -18,8 +21,8 @@ let defaultView = {
 
 let featureGroup = L.featureGroup();
 
-// const symbology = "centres-labellises";
-const symbology = "c";
+const symbology = "centres-labellises";
+// const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
@@ -53,7 +56,8 @@ const addMarkers = (map, data) => {
     let marker = L.marker([item.y, item.x], {
       icon: setIcon(setMarkerColor(item.category), false, 'H'),
       selected: false,
-      props: item
+      props: item,
+      title: `${item.name} -<>- ${item.address}`
     });
     marker.on({
       click: function () {
@@ -274,6 +278,19 @@ const leafletMap = (divId) => {
     });
     markers.sort((a, b) => b.y - a.y);
     addMarkers(map, markers);
+    // PinSearch component
+    var searchBar = L.control.pinSearch({
+      position: 'bottomright',
+      placeholder: 'Search...',
+      buttonText: 'Search',
+      onSearch: function(query) {
+          console.log('Search query:', query);
+          // Handle the search query here
+      },
+      searchBarWidth: '200px',
+      searchBarHeight: '30px',
+      maxSearchResults: 3
+    }).addTo(map);    
   }).catch(error => {
     console.error('Impossible to retrieve data from the server');
     console.error('Error:', error);
