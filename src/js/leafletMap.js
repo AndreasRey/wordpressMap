@@ -8,6 +8,14 @@ import getData from './getData';
 import setIcon from './customLeafletIcon';
 import { createInfoPopup, updateInfoPopup } from './infoPopup';
 
+let screenWidth = window.innerWidth;
+
+let defaultView = {
+  y: 48.6925713,
+  x: 2.2912155,
+  zoom: screenWidth < 660 ? 8 : 9
+}
+
 let featureGroup = L.featureGroup();
 
 // const symbology = "centres-labellises";
