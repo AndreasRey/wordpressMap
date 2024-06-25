@@ -23,7 +23,7 @@ const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
-    return '#F16C76';
+    return '#0086C7';
   } else {
     if (category === "1") {
       return '#F16C76';
