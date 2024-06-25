@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import '../css/infoPopup.css';
 import achileLogoUrl from '../img/ACHILE-logo-couleurs-seul.svg';
+import googleMapLogo from '../img/google_maps_logo.svg';
 
 
 let info = L.control({ position: 'bottomright' });
@@ -47,8 +48,8 @@ const createInfoPopup = (map) => {
           <div class="popup-details">
             <h3>${props.name}</h3>
             <p>${props.address}</p>
-            <p><a class="mapsLink" href="#">Open in Google Maps</a></p>
-            <p><a href="${props.link}" target="_blank">Site internet de l'établissement</a></p>
+            <p><a class="mapsLink" href="#"><img class="google-maps-logo" src="${googleMapLogo}" alt="Google Maps logo"> Google Maps</a></p>
+            <p><a href="${props.link}" target="_blank">Site internet de l'hôpital</a></p>
           </div>
         </div>
       `;
