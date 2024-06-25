@@ -21,8 +21,8 @@ let defaultView = {
 
 let featureGroup = L.featureGroup();
 
-const symbology = "centres-labellises";
-// const symbology = "c";
+// const symbology = "centres-labellises";
+const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
@@ -52,6 +52,7 @@ const refreshMarkers = (clearSelection) => {
 
 
 const addMarkers = (map, data) => {  
+  let listHtml = '<ul class="centre-liste-ul">';
   data.forEach((item) => {
     let marker = L.marker([item.y, item.x], {
       icon: setIcon(setMarkerColor(item.category), false, 'H'),
@@ -68,7 +69,16 @@ const addMarkers = (map, data) => {
       }
     })
     marker.addTo(featureGroup);
+    if (symbology !== "centres-labellises") {
+      listHtml += `<li class="centre-list-item">
+        ${item.name} | ${item.address} | <a href="${item.link}" target="_blank">Site internet</a> | <a href="#" class="centre-list-item-link" data-lat="${item.y}" data-lon="${item.x}">Google maps</a>
+      </li>`;
+    }
   });
+  listHtml += '</ul>';
+  if (symbology !== "centres-labellises") {
+    document.getElementById('centres-liste').innerHTML = listHtml;
+  }
   featureGroup.addTo(map);
   let loadingOverlay = document.getElementById('loading-overlay');
   loadingOverlay.style.display = 'none';

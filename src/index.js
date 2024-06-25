@@ -30,6 +30,11 @@ function component() {
   map.appendChild(loadingOverlay);
 
   element.appendChild(map);
+
+  const list = document.createElement('div');
+  list.id = 'centres-liste';
+
+  element.appendChild(list);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
