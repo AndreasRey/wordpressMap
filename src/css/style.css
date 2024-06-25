@@ -127,3 +127,10 @@
 .legend .legend-item, .legend.expanded .legend-icon {
   display: none;
 }
+  display: flex;
+  align-items: center;
+}
+.google-maps-logo {
+  max-width: 14px;
+  margin-right: 0.5em;
+}
