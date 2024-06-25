@@ -74,6 +74,34 @@ const createInfoPopup = (map) => {
     }
   };
   info.addTo(map);  
+
+  // Workaround to allow scrolling the page through the info popup on mobile devices
+  var customControl = document.querySelector('.map-info-popup.leaflet-control');
+
+  var startY;
+
+  customControl.addEventListener('touchstart', function(e) {
+      if (e.touches.length === 1) {
+          startY = e.touches[0].clientY;
+          e.stopPropagation();
+      }
+  });
+
+  customControl.addEventListener('touchmove', function(e) {
+      if (e.touches.length === 1) {
+          var touch = e.touches[0];
+          var deltaY = touch.clientY - startY;
+          window.scrollBy(0, -deltaY); // Scroll the page
+          startY = touch.clientY; // Update startY for the next move
+          e.stopPropagation();
+      }
+  });
+
+  customControl.addEventListener('touchend', function(e) {
+      if (e.touches.length === 0) {
+          e.stopPropagation();
+      }
+  });
 }
 
 const updateInfoPopup = (props) => {
