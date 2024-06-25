@@ -77,7 +77,7 @@ const leafletMap = (divId) => {
     fullscreenControlOptions: {
       position: 'topleft'
     }
-  }).setView([48.6925713, 2.2912155], 9);
+  }).setView([defaultView.y, defaultView.x], defaultView.zoom);
 
   // This focus the map div on first click (to avoid non-educated users not seeing the info popup when clicking on a marker)
   const mapContainer = document.getElementById(divId);
@@ -148,7 +148,7 @@ const leafletMap = (divId) => {
         container.innerHTML = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 12L2 42h10v20h18V42h4v20h18V42h10z"/></svg>';
 
         container.onclick = function() {
-            map.flyTo([48.6925713, 2.2912155], 9);
+            map.flyTo([defaultView.y, defaultView.x], defaultView.zoom);
         };
 
         return container;
