@@ -57,7 +57,7 @@ const addMarkers = (map, data) => {
       icon: setIcon(setMarkerColor(item.category), false, 'H'),
       selected: false,
       props: item,
-      title: `${item.name} -<>- ${item.address}`
+      searchTitle: `${item.name} -<>- ${item.address}`
     });
     marker.on({
       click: function () {
@@ -70,6 +70,8 @@ const addMarkers = (map, data) => {
     marker.addTo(featureGroup);
   });
   featureGroup.addTo(map);
+  let loadingOverlay = document.getElementById('loading-overlay');
+  loadingOverlay.style.display = 'none';
   map.on('click', function () {
     refreshMarkers(true);
   });
@@ -82,6 +84,7 @@ const leafletMap = (divId) => {
       position: 'topleft'
     }
   }).setView([defaultView.y, defaultView.x], defaultView.zoom);
+
 
   // This focus the map div on first click (to avoid non-educated users not seeing the info popup when clicking on a marker)
   const mapContainer = document.getElementById(divId);
@@ -138,7 +141,7 @@ const leafletMap = (divId) => {
         position: 'topleft'
     },
     onAdd: function(map) {
-        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-home');
+        let container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-home');
         
         container.style.backgroundColor = 'white';
         container.style.width = '30px';
@@ -152,7 +155,7 @@ const leafletMap = (divId) => {
         container.innerHTML = '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 12L2 42h10v20h18V42h4v20h18V42h10z"/></svg>';
 
         container.onclick = function() {
-            map.flyTo([defaultView.y, defaultView.x], defaultView.zoom);
+            map.flyTo([defaultView.y, defaultView.x], defaultView.zoom);       
         };
 
         return container;
@@ -279,7 +282,7 @@ const leafletMap = (divId) => {
     markers.sort((a, b) => b.y - a.y);
     addMarkers(map, markers);
     // PinSearch component
-    var searchBar = L.control.pinSearch({
+    let searchBar = L.control.pinSearch({
       position: 'bottomright',
       placeholder: 'Search...',
       buttonText: 'Search',

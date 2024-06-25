@@ -9,9 +9,23 @@
 }
 
 .search-input {
-  width: 200px;
+  width: 2px !important;
   height: 30px;
   padding: 5px 30px 5px 10px;
+  transition: width 0.4s ease;
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  border-radius: 4px;
+}
+.search-input::placeholder {
+  color: transparent;
+}
+
+.search-input:focus, .search-input.expanded {
+  width: 200px !important;
+}
+.search-input.expanded::placeholder {
+  color: inherit;
 }
 
 .search-icon {

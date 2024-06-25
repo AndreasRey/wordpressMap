@@ -2,6 +2,21 @@ function formatMatch(match) {
   return match.replace(/ -<>- /g, "</br>");
 }
 
+function getVerticalOffset() {
+    // Get the dimensions of the custom control at the bottom
+    var customControl = document.querySelector('.map-info-popup.leaflet-control');
+    var customControlHeight = customControl ? customControl.offsetHeight : 0;
+
+    // Get the dimensions of the attribution control
+    var attributionControl = document.querySelector('.leaflet-control-attribution.leaflet-control');
+    var attributionControlHeight = attributionControl ? attributionControl.offsetHeight : 0;
+
+    var totalHeight = customControlHeight + attributionControlHeight;
+
+    // Return half the height of the custom control plus a little extra padding to match the pin size
+    return (totalHeight / 2) - 45;
+}
+
 L.Control.PinSearch = L.Control.extend({
   options: {
     position: 'topright',
@@ -55,6 +70,7 @@ L.Control.PinSearch = L.Control.extend({
     });
 
     input.addEventListener('focus', function() {
+      input.classList.add('expanded');
       var term = input.value.toLowerCase();
       var matches = self.markerLabels.filter(function(label) {
         return label.toLowerCase().includes(term);
@@ -68,13 +84,13 @@ L.Control.PinSearch = L.Control.extend({
       self._onSearchItemClick(query);
     });
 
-    resultsContainer.addEventListener('keydown', function(event) {
-      self._onResultsItemKeydown(event);
-    });
+    // resultsContainer.addEventListener('keydown', function(event) {
+    //   self._onResultsItemKeydown(event);
+    // });
 
-    document.addEventListener('keyup', function(event) {
-      self._onDocumentKeyup(event);
-    });
+    // document.addEventListener('keyup', function(event) {
+    //   self._onDocumentKeyup(event);
+    // });
 
     return container;
   },
@@ -82,13 +98,13 @@ L.Control.PinSearch = L.Control.extend({
   _populateMarkerLabels: function(map) {
     this.markerLabels = [];
     map.eachLayer(function(layer) {
-      if (layer instanceof L.Marker && layer.options.title) {
-        this.markerLabels.push(layer.options.title);
+      if (layer instanceof L.Marker && layer.options.searchTitle) {
+        this.markerLabels.push(layer.options.searchTitle);
       } else if (typeof L.MarkerCluster !== 'undefined' && layer instanceof L.MarkerCluster) {
         // Use getAllChildMarkers to get all markers in the cluster, and add their titles to the list
         layer.getAllChildMarkers().forEach((child) => {
-          if (child instanceof L.Marker && child.options.title) {
-            this.markerLabels.push(child.options.title);
+          if (child instanceof L.Marker && child.options.searchTitle) {
+            this.markerLabels.push(child.options.searchTitle);
           }
         });
       }
@@ -106,12 +122,15 @@ L.Control.PinSearch = L.Control.extend({
 
   _onInputBlur: function(event) {
     var input = event.target;
+    input.classList.remove('expanded');
+    input.value = '';
     var container = input.parentNode;
-    var resultsContainer = container.querySelector('.search-results');
+    var resultsContainer = document.querySelector('.leaflet-control-pinsearch .search-results');
+
     
     // Delay hiding the results to allow clicking on them
     setTimeout(function() {
-      if (resultsContainer && resultsContainer.parentNode === container && !container.contains(document.activeElement)) {
+      if (resultsContainer) {
         resultsContainer.style.display = 'none';
       }
     }, 200);
@@ -244,15 +263,21 @@ L.Control.PinSearch = L.Control.extend({
     if (this.options.focusOnMarker) {
       var marker = this._findMarkerByTitle(query);
       if (marker) {
-        this._map.panTo(marker.getLatLng());
+        var map = this._map;
+        map.panTo(marker.getLatLng(), { animate: false });
+        map.panBy([0, getVerticalOffset()], { animate: false });
+        marker.fire('click');
+        setTimeout(() => {
+          input.value = '';
+        }, 200);        
       }
     }
   },
 
-  _findMarkerByTitle: function(title) {
+  _findMarkerByTitle: function(searchTitle) {
     var marker = null;
     this._map.eachLayer(function(layer) {
-      if (layer instanceof L.Marker && layer.options.title === title) {
+      if (layer instanceof L.Marker && layer.options.searchTitle === searchTitle) {
         marker = layer;
       }
     });

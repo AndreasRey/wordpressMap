@@ -2,6 +2,10 @@ import _ from 'lodash';
 import './css/style.css';
 import leafletMap from './js/leafletMap';
 
+var oijoij = document.createElement('div');
+oijoij.innerHTML = 'dfgergerv<br>zefzefzefdfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>';
+document.body.appendChild(oijoij);
+
 function component() {
   let element = document.querySelector('.wordpressmap-content');
 
@@ -14,6 +18,16 @@ function component() {
 
   const map = document.createElement('div');
   map.id = 'map';
+
+  const loadingOverlay = document.createElement('div');
+  loadingOverlay.id = 'loading-overlay';
+
+  const spinner = document.createElement('div');
+  spinner.className = 'spinner';
+
+  loadingOverlay.appendChild(spinner);
+
+  map.appendChild(loadingOverlay);
 
   element.appendChild(map);
 }
