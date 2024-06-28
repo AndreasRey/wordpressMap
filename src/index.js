@@ -1,10 +1,5 @@
-import _ from 'lodash';
 import './css/style.css';
 import leafletMap from './js/leafletMap';
-
-var oijoij = document.createElement('div');
-oijoij.innerHTML = 'dfgergerv<br>zefzefzefdfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>dfgergerv<br>';
-document.body.appendChild(oijoij);
 
 function component() {
   let element = document.querySelector('.wordpressmap-content');
