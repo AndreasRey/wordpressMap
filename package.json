@@ -22,9 +22,10 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "datatables.net-dt": "^2.0.8",
+    "datatables.net-responsive-dt": "^3.0.2",
     "leaflet": "^1.9.4",
     "leaflet.locatecontrol": "^0.81.1",
-    "leaflet.pinsearch": "^1.0.5",
-    "lodash": "^4.17.21"
+    "leaflet.pinsearch": "^1.0.5"
   }
 }
