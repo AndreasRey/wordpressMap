@@ -10,6 +10,7 @@ import L from 'leaflet';
 import getData from './getData';
 import setIcon from './customLeafletIcon';
 import { createInfoPopup, updateInfoPopup } from './infoPopup';
+import googleMapsLink from './googleMapsLink';
 
 let screenWidth = window.innerWidth;
 
@@ -71,7 +72,7 @@ const addMarkers = (map, data) => {
     marker.addTo(featureGroup);
     if (symbology !== "centres-labellises") {
       listHtml += `<li class="centre-list-item">
-        ${item.name} | ${item.address} | <a href="${item.link}" target="_blank">Site internet</a> | <a href="#" class="centre-list-item-link" data-lat="${item.y}" data-lon="${item.x}">Google maps</a>
+        ${item.name} | ${item.address} | <a href="${item.link}" target="_blank">Site internet</a> | ${googleMapsLink(item.x, item.y, item.placeId)}
       </li>`;
     }
   });
@@ -276,7 +277,7 @@ const leafletMap = (divId) => {
   createInfoPopup(map);
 
   L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
-
+  const removeTags = str => str.replace(/<p><span id="place-id">|<\/span><\/p>/g, '');
   getData('	https://www.urgenceschirurgicalesinfantiles-idf.fr/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMoxR0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABU0Wug').then(data => {
     const markers = data.markers.map(function (item) {
       return {
@@ -284,6 +285,7 @@ const leafletMap = (divId) => {
         address: item.address,
         x: parseFloat(item.lng),
         y: parseFloat(item.lat),
+        placeId: item.description !== '' ? removeTags(item.description) : null,
         pic: item.pic,
         link: item.link,
         category: item.categories[0]
@@ -297,7 +299,6 @@ const leafletMap = (divId) => {
       placeholder: 'Search...',
       buttonText: 'Search',
       onSearch: function(query) {
-          console.log('Search query:', query);
           // Handle the search query here
       },
       searchBarWidth: '200px',
