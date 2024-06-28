@@ -13,11 +13,13 @@
 
 #map {
   height: 100%;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin: 2em;
   border: 2px solid rgba(0,0,0,0.2);
   background-clip: padding-box;
   border-radius: 4px;
+}
+#centres-liste {
+  margin: 2em;
 }
 .leaflet-container .leaflet-control-attribution {
   float: right;
