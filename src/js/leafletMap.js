@@ -23,8 +23,8 @@ let defaultView = {
 
 let featureGroup = L.featureGroup();
 
-// const symbology = "centres-labellises";
-const symbology = "c";
+const symbology = "centres-labellises";
+//const symbology = "c";
 
 const setMarkerColor = (category) => {
   if (symbology === "centres-labellises") {
@@ -306,7 +306,8 @@ const leafletMap = (divId) => {
 
     // PinSearch component
     let searchBar = L.control.pinSearch({
-      position: 'bottomright',
+      // position: 'bottomright',
+      position: 'topleft',
       placeholder: 'Search...',
       buttonText: 'Search',
       onSearch: function(query) {

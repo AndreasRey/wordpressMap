@@ -38,7 +38,6 @@
   height: 20px !important;
 }
 .leaflet-container .leaflet-control-pinsearch .search-results {
-  left: unset;
   width: max-content;
   top: 36px;
 }

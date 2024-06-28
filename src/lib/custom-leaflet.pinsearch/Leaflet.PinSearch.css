@@ -10,22 +10,22 @@
 
 .search-input {
   width: 2px !important;
-  height: 30px;
-  padding: 5px 30px 5px 10px;
-  transition: width 0.4s ease;
-  border: 2px solid rgba(0,0,0,0.2);
-  background-clip: padding-box;
-  border-radius: 4px;
+  height: 30px !important;
+  padding: 5px 30px 5px 10px !important;
+  transition: width 0.4s ease !important;
+  border: 2px solid rgba(0,0,0,0.2) !important;
+  background-clip: padding-box !important;
+  border-radius: 4px !important;
 }
 .search-input::placeholder {
-  color: transparent;
+  color: transparent !important;
 }
 
 .search-input:focus, .search-input.expanded {
   width: 200px !important;
 }
 .search-input.expanded::placeholder {
-  color: inherit;
+  color: inherit !important;
 }
 
 .search-icon {
@@ -42,7 +42,6 @@
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
-  right: 0;
   padding: 5px;
   background-color: #fff;
   border: 1px solid #ccc;
