@@ -72,7 +72,6 @@ const addMarkers = (map, data) => {
     marker.addTo(featureGroup);
   });
   if (symbology !== "centres-labellises") {    
-    console.log("data", data);
     createTable('centres-liste', data, [
       { data: 'name', title: 'Nom' },
       { data: 'address', title: 'Adresse' },
@@ -304,7 +303,7 @@ const leafletMap = (divId) => {
     });
     markers.sort((a, b) => b.y - a.y);
     addMarkers(map, markers);
-    
+
     // PinSearch component
     let searchBar = L.control.pinSearch({
       position: 'bottomright',
