@@ -11,6 +11,7 @@ import getData from './getData';
 import setIcon from './customLeafletIcon';
 import { createInfoPopup, updateInfoPopup } from './infoPopup';
 import googleMapsLink from './googleMapsLink';
+import createTable from './table';
 
 let screenWidth = window.innerWidth;
 
@@ -53,7 +54,6 @@ const refreshMarkers = (clearSelection) => {
 
 
 const addMarkers = (map, data) => {  
-  let listHtml = '<ul class="centre-liste-ul">';
   data.forEach((item) => {
     let marker = L.marker([item.y, item.x], {
       icon: setIcon(setMarkerColor(item.category), false, 'H'),
@@ -70,15 +70,26 @@ const addMarkers = (map, data) => {
       }
     })
     marker.addTo(featureGroup);
-    if (symbology !== "centres-labellises") {
-      listHtml += `<li class="centre-list-item">
-        ${item.name} | ${item.address} | <a href="${item.link}" target="_blank">Site internet</a> | ${googleMapsLink(item.x, item.y, item.placeId)}
-      </li>`;
-    }
   });
-  listHtml += '</ul>';
-  if (symbology !== "centres-labellises") {
-    document.getElementById('centres-liste').innerHTML = listHtml;
+  if (symbology !== "centres-labellises") {    
+    console.log("data", data);
+    createTable('centres-liste', data, [
+      { data: 'name', title: 'Nom' },
+      { data: 'address', title: 'Adresse' },
+      { data: function (o) {
+        let cat;
+        if (o.category === "1") {
+          cat = 'Référent';
+        } else if (o.category === "2") {
+          cat = 'Proximité';
+        } else if (o.category === "3") {
+          cat = 'Spécialisé';
+        }
+        return cat;
+      }, title: 'Categorie' },
+      { data: function (o) { return `<a href="${o.link}" target="_blank">Site internet</a>`; }, title: 'Site internet' },
+      { data: function (o) { return googleMapsLink(o.x, o.y, o.placeId); }, title: 'Google Maps' }
+    ]);
   }
   featureGroup.addTo(map);
   let loadingOverlay = document.getElementById('loading-overlay');
@@ -293,6 +304,7 @@ const leafletMap = (divId) => {
     });
     markers.sort((a, b) => b.y - a.y);
     addMarkers(map, markers);
+    
     // PinSearch component
     let searchBar = L.control.pinSearch({
       position: 'bottomright',
