@@ -13,8 +13,8 @@
 
 #map {
   height: 100%;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
   border: 2px solid rgba(0,0,0,0.2);
   background-clip: padding-box;
   border-radius: 4px;
