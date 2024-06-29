@@ -5,7 +5,6 @@ import '../lib/leaflet.fullscreen-v3.0.2/Control.FullScreen.js';
 import '../lib/leaflet.fullscreen-v3.0.2/Control.FullScreen.css';
 import '../lib/custom-leaflet.pinsearch/Leaflet.PinSearch.js';
 import '../lib/custom-leaflet.pinsearch/Leaflet.PinSearch.css';
-import 'leaflet.pinsearch/src/Leaflet.PinSearch.css';
 import L from 'leaflet';
 import getData from './getData';
 import setIcon from './customLeafletIcon';
