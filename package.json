@@ -8,7 +8,9 @@
     "start": "webpack serve --config webpack.config.dev.js --open",
     "dev": "webpack serve --config webpack.config.dev.js --open",
     "build": "webpack",
-    "plugin": "webpack --config webpack.config.plugin.js"
+    "plugin": "npm run plugin-win",
+    "plugin-win": "mkdir plugin & xcopy /s /e /y webmap plugin\\ & webpack --config webpack.config.plugin.js & cd plugin & powershell Compress-Archive -Path * -DestinationPath ..\\wordpressMap.zip & cd .. & cd plugin & del *.* /s /q & move ..\\wordpressMap.zip .\\",
+    "plugin-linux": "rm -rf ./plugin && mkdir -p ./plugin && cp -R ./webmap/* ./plugin && webpack --config webpack.config.plugin.js && cd ./plugin && zip -r ../wordpressMap.zip . && cd .. && cd plugin && find . -type f ! -name 'wordpressMap.zip' -delete && find . -type d -empty -delete"
   },
   "keywords": [],
   "author": "",
