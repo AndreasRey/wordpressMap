@@ -21,7 +21,7 @@ const createTable = (anchorDivId, dataset, dataModel) => {
   document.getElementById(anchorDivId).innerHTML = tableHtmlString;
   let table = new DataTable('#myTable', {
     responsive: true,
-    pageLength: 25
+    pageLength: 10
   });
   return table;
 };
