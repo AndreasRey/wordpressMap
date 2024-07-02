@@ -12,92 +12,94 @@ import { createInfoPopup, updateInfoPopup } from './infoPopup';
 import googleMapsLink from './googleMapsLink';
 import createTable from './table';
 
-let screenWidth = window.innerWidth;
+const leafletMap = (divId, mapType) => {
 
-let defaultView = {
-  y: 48.6925713,
-  x: 2.2912155,
-  zoom: screenWidth < 660 ? 8 : 9
-}
+  let screenWidth = window.innerWidth;
 
-let featureGroup = L.featureGroup();
-
-const symbology = "centres-labellises";
-//const symbology = "c";
-
-const setMarkerColor = (category) => {
-  if (symbology === "centres-labellises") {
-    return '#0086C7';
-  } else {
-    if (category === "1") {
-      return '#F16C76';
-    } else if (category === "2") {      
-      return '#00C490';
-    } else if (category === "3") {
-      return '#FFB056';
-    }
+  let defaultView = {
+    y: 48.6925713,
+    x: 2.2912155,
+    zoom: screenWidth < 660 ? 8 : 9
   }
-};
 
-const refreshMarkers = (clearSelection) => {
-  if (clearSelection) {
-    featureGroup.eachLayer(function (layer) {
-      layer.options.selected = false;
-    });
-    updateInfoPopup();
-  }
-  featureGroup.eachLayer(function (layer) {
-    layer.setIcon(setIcon(setMarkerColor(layer.options.props.category), layer.options.selected, 'H'));
-  });
-};
+  let featureGroup = L.featureGroup();
 
+  const symbology = mapType === "type1" ? "centres-labellises" : "type2";
+  //const symbology = "c";
 
-const addMarkers = (map, data) => {  
-  data.forEach((item) => {
-    let marker = L.marker([item.y, item.x], {
-      icon: setIcon(setMarkerColor(item.category), false, 'H'),
-      selected: false,
-      props: item,
-      searchTitle: `${item.name} -<>- ${item.address}`
-    });
-    marker.on({
-      click: function () {
-        refreshMarkers(true);        
-        marker.options.selected = true;
-        updateInfoPopup(marker.options.props);
-        refreshMarkers(false);
+  const setMarkerColor = (category) => {
+    if (symbology === "centres-labellises") {
+      return '#0086C7';
+    } else {
+      if (category === "1") {
+        return '#F16C76';
+      } else if (category === "2") {      
+        return '#00C490';
+      } else if (category === "3") {
+        return '#FFB056';
       }
-    })
-    marker.addTo(featureGroup);
-  });
-  if (symbology !== "centres-labellises") {    
-    createTable('centres-liste', data, [
-      { data: 'name', title: 'Nom' },
-      { data: 'address', title: 'Adresse' },
-      { data: function (o) {
-        let cat;
-        if (o.category === "1") {
-          cat = 'Référent';
-        } else if (o.category === "2") {
-          cat = 'Proximité';
-        } else if (o.category === "3") {
-          cat = 'Spécialisé';
-        }
-        return cat;
-      }, title: 'Categorie' },
-      { data: function (o) { return `<a href="${o.link}" target="_blank">Site internet</a>`; }, title: 'Site internet' },
-      { data: function (o) { return googleMapsLink(o.x, o.y, o.placeId); }, title: 'Google Maps' }
-    ]);
-  }
-  featureGroup.addTo(map);
-  let loadingOverlay = document.getElementById('loading-overlay');
-  loadingOverlay.style.display = 'none';
-  map.on('click', function () {
-    refreshMarkers(true);
-  });
-};
+    }
+  };
 
-const leafletMap = (divId) => {
+  const refreshMarkers = (clearSelection) => {
+    if (clearSelection) {
+      featureGroup.eachLayer(function (layer) {
+        layer.options.selected = false;
+      });
+      updateInfoPopup();
+    }
+    featureGroup.eachLayer(function (layer) {
+      layer.setIcon(setIcon(setMarkerColor(layer.options.props.category), layer.options.selected, 'H'));
+    });
+  };
+
+
+  const addMarkers = (map, data) => {  
+    data.forEach((item) => {
+      let marker = L.marker([item.y, item.x], {
+        icon: setIcon(setMarkerColor(item.category), false, 'H'),
+        selected: false,
+        props: item,
+        searchTitle: `${item.name} -<>- ${item.address}`
+      });
+      marker.on({
+        click: function () {
+          refreshMarkers(true);        
+          marker.options.selected = true;
+          updateInfoPopup(marker.options.props);
+          refreshMarkers(false);
+        }
+      })
+      marker.addTo(featureGroup);
+    });
+    if (symbology !== "centres-labellises") {    
+      createTable('centres-liste', data, [
+        { data: 'name', title: 'Nom' },
+        { data: 'address', title: 'Adresse' },
+        { data: function (o) {
+          let cat;
+          if (o.category === "1") {
+            cat = 'Référent';
+          } else if (o.category === "2") {
+            cat = 'Proximité';
+          } else if (o.category === "3") {
+            cat = 'Spécialisé';
+          }
+          return cat;
+        }, title: 'Categorie' },
+        { data: function (o) { return `<a href="${o.link}" target="_blank">Site internet</a>`; }, title: 'Site internet' },
+        { data: function (o) { return googleMapsLink(o.x, o.y, o.placeId); }, title: 'Google Maps' }
+      ]);
+    }
+    featureGroup.addTo(map);
+    let loadingOverlay = document.getElementById('loading-overlay');
+    loadingOverlay.style.display = 'none';
+    map.on('click', function () {
+      refreshMarkers(true);
+    });
+  };
+
+
   const map = L.map(divId, {
     fullscreenControl: true,
     fullscreenControlOptions: {
@@ -180,7 +182,7 @@ const leafletMap = (divId) => {
 
         return container;
     }
-});
+  });
 
   const LegendControl = L.Control.extend({
     options: {

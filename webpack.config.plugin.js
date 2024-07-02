@@ -1,10 +1,11 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'production',
   entry: './src/index.js',
-  output: {
+  output: {    
     filename: 'script.js',
-    path: path.resolve(__dirname, 'webmap'),
+    path: path.resolve(__dirname, 'plugin'),
   },
   module: {
     rules: [

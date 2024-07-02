@@ -34,5 +34,10 @@ function component() {
 
 document.addEventListener('DOMContentLoaded', () => {
   component();
-  leafletMap('map');
+  let container = document.querySelector('.wordpressmap-content');
+  if (container) {
+    let mapType = container.getAttribute('data-map-type');
+    let type = mapType ? mapType : 'type1';
+    leafletMap('map', type);
+  }  
 });
