@@ -46,6 +46,10 @@
 }
 .leaflet-container .leaflet-control-pinsearch .search-input-container .search-input {
   height: 20px !important;
+  cursor: pointer;
+}
+.leaflet-container .leaflet-control-pinsearch .search-input-container .search-input.expanded {
+  cursor: text;
 }
 .leaflet-container .leaflet-control-pinsearch .search-results {
   width: max-content;
