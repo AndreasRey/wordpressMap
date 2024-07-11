@@ -50,6 +50,11 @@ const leafletMap = (divId, mapType) => {
     }
     featureGroup.eachLayer(function (layer) {
       layer.setIcon(setIcon(setMarkerColor(layer.options.props.category), layer.options.selected, 'H'));
+      if (layer.options.selected) {
+        layer.setZIndexOffset(9999);
+      } else {
+        layer.setZIndexOffset(layer.options.zIndex);
+      }
     });
   };
 
@@ -58,6 +63,7 @@ const leafletMap = (divId, mapType) => {
     data.forEach((item) => {
       let marker = L.marker([item.y, item.x], {
         icon: setIcon(setMarkerColor(item.category), false, 'H'),
+        zIndex: item.zIndex,
         selected: false,
         props: item,
         searchTitle: `${item.name} -<>- ${item.address}`
@@ -290,7 +296,7 @@ const leafletMap = (divId, mapType) => {
   L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
   const removeTags = str => str.replace(/<p><span id="place-id">|<\/span><\/p>/g, '');
   getData('	https://www.urgenceschirurgicalesinfantiles-idf.fr/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMoxR0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABU0Wug').then(data => {
-    const markers = data.markers.map(function (item) {
+    const markers = data.markers.map(function (item, i) {
       return {
         name: item.title,
         address: item.address,
@@ -299,7 +305,8 @@ const leafletMap = (divId, mapType) => {
         placeId: item.description !== '' ? removeTags(item.description) : null,
         pic: item.pic,
         link: item.link,
-        category: item.categories[0]
+        category: item.categories[0],
+        zIndex: i
       };
     });
     markers.sort((a, b) => b.y - a.y);
