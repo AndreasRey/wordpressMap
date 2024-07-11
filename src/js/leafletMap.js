@@ -37,6 +37,10 @@ const leafletMap = (divId, mapType) => {
         return '#00C490';
       } else if (category === "3") {
         return '#FFB056';
+      } else if (category === "4") {
+        return '#0086C7';
+      } else {
+        return '#808080';
       }
     }
   };
@@ -90,6 +94,10 @@ const leafletMap = (divId, mapType) => {
             cat = 'Proximité';
           } else if (o.category === "3") {
             cat = 'Spécialisé';
+          } else if (o.category === "4") {
+            cat = 'Urgences courantes';
+          } else {
+            cat = 'Autre';
           }
           return cat;
         }, title: 'Categorie' },
@@ -205,6 +213,11 @@ const leafletMap = (divId, mapType) => {
         legendClass = 'legend';
       } else {
         legendItems = [{
+          color: setMarkerColor("4"),
+          text: 'Urgences courantes',
+          layer: "4"
+        }, 
+        {
           color: setMarkerColor("2"),
           text: 'Etablissements de proximités',
           layer: "2"
