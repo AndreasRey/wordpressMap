@@ -23,7 +23,6 @@ const leafletMap = (divId, mapType) => {
   }
 
   let featureGroup = L.featureGroup();
-
   const symbology = mapType === "type1" ? "centres-labellises" : "type2";
   //const symbology = "c";
 

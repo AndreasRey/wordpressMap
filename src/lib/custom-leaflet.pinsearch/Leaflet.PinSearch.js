@@ -23,7 +23,6 @@ L.Control.PinSearch = L.Control.extend({
     placeholder: 'Search...',
     buttonText: 'Search',
     onSearch: function(query) {
-      console.log('Search query:', query);
     },
     focusOnMarker: true,
     searchBarWidth: '200px',
@@ -172,7 +171,6 @@ L.Control.PinSearch = L.Control.extend({
       var highlightedItem = this._container.querySelector('.search-results-item.highlight');
       if (highlightedItem) {
         var query = highlightedItem.textContent;
-        console.log(query);
         this._onSearchItemClick(query);
       }
     }
@@ -221,7 +219,6 @@ L.Control.PinSearch = L.Control.extend({
         var highlightedItem = resultsContainer.querySelector('.search-results-item.highlight');
         if (highlightedItem) {
           var query = highlightedItem.textContent;
-          console.log(query);
           this._onSearchItemClick(query);
         }
       }

@@ -65,11 +65,9 @@ L.control
 
 // events are fired when entering or exiting fullscreen.
 map.on('enterFullscreen', function () {
-	console.log('entered fullscreen');
 });
 
 map.on('exitFullscreen', function () {
-	console.log('exited fullscreen');
 });
 
 // you can also toggle fullscreen from map object
