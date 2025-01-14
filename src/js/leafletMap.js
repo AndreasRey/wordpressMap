@@ -207,7 +207,7 @@ const leafletMap = (divId, mapType) => {
       if (symbology === "centres-labellises") {
         legendItems = [{
           color: setMarkerColor(),
-          text: 'Centres labellisés'
+          text: 'Centres habilités'
         }];
         legendClass = 'legend';
       } else {
