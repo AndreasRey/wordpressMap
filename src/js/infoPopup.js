@@ -37,7 +37,7 @@ const createInfoPopup = (map) => {
       htmlString = `
         <div class="popup-content popup-content-aligned">
           <img class="popup-achile-logo" src="${achileLogoUrl}" alt="ACHILE logo">
-          <p><h3>Centres labellisés</h3></p>
+          <p><h3>Centres habilités</h3></p>
           <p>Click on a marker to see more details.</p>
         </div>
       `;

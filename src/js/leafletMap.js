@@ -88,13 +88,13 @@ const leafletMap = (divId, mapType) => {
         { data: function (o) {
           let cat;
           if (o.category === "1") {
-            cat = 'Référent';
+            cat = 'Recours';
           } else if (o.category === "2") {
-            cat = 'Proximité';
+            cat = 'Proximité ou en attente de gradation';
           } else if (o.category === "3") {
             cat = 'Spécialisé';
           } else if (o.category === "4") {
-            cat = 'Urgences courantes';
+            cat = 'Urgences chirurgicales';
           } else {
             cat = 'Autre';
           }
@@ -213,20 +213,20 @@ const leafletMap = (divId, mapType) => {
       } else {
         legendItems = [{
           color: setMarkerColor("4"),
-          text: 'Urgences courantes',
+          text: 'Établissements urgences chirurgicales',
           layer: "4"
         }, 
         {
           color: setMarkerColor("2"),
-          text: 'Etablissements de proximités',
+          text: 'Etablissements de proximité ou en attente de gradation',
           layer: "2"
         }, {
           color: setMarkerColor("3"),
-          text: 'Etablissements spécialisés',
+          text: 'Établissements spécialisés',
           layer: "3"
         }, {
           color: setMarkerColor("1"),
-          text: 'Etablissements référents',
+          text: 'Établissements de recours',
           layer: "1"
         }];
         legendClass = 'legend expanded';
